@@ -7,6 +7,7 @@ import org.testng.annotations.*;
 
 import java.util.Random;
 
+//@Listeners({TestRailListener.class})
 public class TestNgTest {
     @Test(groups = {"smoke,regression"}, priority = 2)
     public void twoTest() {
@@ -58,6 +59,7 @@ public class TestNgTest {
 
     @AfterSuite
     public void afterSuit() {
+        System.out.println("Running test in " + System.getProperty("browser") + " browser");
         System.out.println("after suit");
     }
 
@@ -74,6 +76,7 @@ public class TestNgTest {
         } else {
             System.out.println("Test failed" + iTestResult.getMethod().getMethodName());
         }
+        System.out.println("Report result to testrail");
     }
 
     @AfterTest
@@ -82,7 +85,8 @@ public class TestNgTest {
         iTestContext.getFailedTests().getAllResults();
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+//    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(description = "Chtoto napisano")
     public void flackyTest() {
         Assert.assertTrue(new Random().nextInt(10) < 3);
     }

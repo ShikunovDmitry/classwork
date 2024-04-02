@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Feature test" verbose="1">
+    <listeners>
+        <listener class-name="com.itacademy.aqa.testng.qTestListener"></listener>
+    </listeners>
     <test name="My smoke">
         <groups>
             <run>

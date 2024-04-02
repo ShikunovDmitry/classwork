@@ -1,0 +1,20 @@
+form{
+    width: 320px;
+    height: 200px;
+    margin: auto;
+    background: rgb(rgb(144, 104, 104), green, blue);
+    padding-right: 5px;
+    padding-left: 10px;
+}
+input{
+    background: #8578A3;
+    border:blueviolet;
+    width: 303px;
+    height: 36px;  
+}
+#userName{
+    background: rgb(192, 198, 1);
+}
+#password{
+ background: #d1d1d1;
+}

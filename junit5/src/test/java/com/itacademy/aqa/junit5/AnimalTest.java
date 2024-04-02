@@ -1,16 +1,14 @@
 package com.itacademy.aqa.junit5;
 
-import com.itacademy.aqa.junit5.Animal;
-import com.itacademy.aqa.junit5.Cat;
-import com.itacademy.aqa.junit5.Dog;
-import com.itacademy.aqa.junit5.Pig;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@ExtendWith(ListenerExample.class)
 public class AnimalTest {
     Cat cat;
 
@@ -47,12 +45,14 @@ public class AnimalTest {
     public static void afterAll(){
         System.out.println("all cleanup");
     }
-    @Test
+    @Test @Tag("smoke")
     public void exceptionTest(){
+        System.out.println("Exception test");
         Exception exception = Assertions.assertThrows(NullPointerException.class, () -> {
             new Cat().whoIam();
         });
-        Assertions.assertNotNull(exception.getMessage());
+        Assertions.assertEquals(exception.getMessage(), "Exception for Cat",
+                "Message of tghe exception is not valid");
     }
 
     public static List<Object[]> params() {
@@ -66,6 +66,7 @@ public class AnimalTest {
     @ParameterizedTest
     @MethodSource("params")
     public void testWithParams(Animal animal, String name) {
-        Assertions.assertEquals(name, animal.whoIam());
+        Assertions.assertEquals(name, animal.whoIam(),
+                "Name of the object is not equal to expected name");
     }
 }
