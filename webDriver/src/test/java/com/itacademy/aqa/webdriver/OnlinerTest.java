@@ -16,21 +16,13 @@ import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class OnlinerTest {
+public class OnlinerTest extends BaseTest{
     public final static By TV_MENU = By.xpath("//*[contains(text(),'Телевизоры')]");
     public final static By TV_PAGE_LOCATOR = By.xpath("//a[contains(text(),'Телевизор')]");
-    WebDriver webDriver;
 
     @BeforeMethod
     public void driverInitialize() {
-        System.setProperty("webdriver.chrome.driver", "c:/chromedriver.exe");
-        webDriver = new ChromeDriver();
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        webDriver.manage().window().maximize();
-        Dimension dimension = new Dimension(1024,768);
-        webDriver.manage().window().setSize(dimension);
         webDriver.get("https://www.onliner.by/");
-
     }
 
     @Test
@@ -68,13 +60,5 @@ public class OnlinerTest {
         List<WebElement> pageElement = webDriver.findElements(TV_PAGE_LOCATOR);
         Assert.assertTrue(pageElement.size() > 0, "Tv page is not opened");
 
-    }
-
-
-    @AfterMethod
-    public void cleanup() {
-        if (webDriver != null) {
-            webDriver.quit();
-        }
     }
 }
