@@ -1,7 +1,9 @@
-package com.itacademy.aqa.onliner.utils;
+package com.itacademy.aqa.utils;
 
+import com.itacademy.aqa.webdriver.Browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -10,5 +12,10 @@ public class WaitUtil {
 
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    }
+    public static void waitUntilElementVisible(WebElement webElement, long timeoutInSeconds){
+
+        WebDriverWait wait = new WebDriverWait(Browser.getDriver(), timeoutInSeconds);
+        wait.until(ExpectedConditions.visibilityOfAllElements(webElement));
     }
 }

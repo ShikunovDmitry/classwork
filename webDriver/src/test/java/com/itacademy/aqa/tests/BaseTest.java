@@ -1,13 +1,9 @@
-package com.itacademy.aqa.webdriver;
+package com.itacademy.aqa.tests;
 
-import com.itacademy.aqa.onliner.utils.Browser;
-import org.openqa.selenium.Dimension;
+import com.itacademy.aqa.webdriver.Browser;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-
-import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     protected WebDriver webDriver;
@@ -15,6 +11,7 @@ public class BaseTest {
     @BeforeMethod
     public void driverInitialize() {
         webDriver = Browser.getDriver();
+        System.out.printf("");
 
     }
 

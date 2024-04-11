@@ -1,5 +1,6 @@
 package com.itacademy.aqa.steam.pages;
 
+import com.itacademy.aqa.utils.WaitUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +15,12 @@ public class SteamAboutPage {
     }
 
     public boolean isOpened() {
+        WaitUtil.waitUntilElementVisible(downloadSteamButton,30);
         return downloadSteamButton.isDisplayed();
+    }
+
+    public void downloadSteam() {
+        WaitUtil.waitUntilElementVisible(downloadSteamButton,30);
+        downloadSteamButton.click();
     }
 }

@@ -1,12 +1,10 @@
 package com.itacademy.aqa.onliner.elements;
 
 import com.itacademy.aqa.onliner.TopMenuEnum;
-import com.itacademy.aqa.onliner.utils.WaitUtil;
+import com.itacademy.aqa.utils.WaitUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TopMenu {
     private static int DEFAULT_ELEMENT_WAIT_IN_SECOND = 30;

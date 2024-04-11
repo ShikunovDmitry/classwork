@@ -1,6 +1,6 @@
-package com.itacademy.aqa.onliner.utils;
+package com.itacademy.aqa.webdriver;
 
-import org.openqa.selenium.Dimension;
+import com.itacademy.aqa.utils.Configuration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -19,7 +19,7 @@ public class Browser {
     }
 
     public static void initDriver() {
-        driver = new ChromeDriver();
+        driver = BrowserFactory.createDriver(BrowserType.valueOf(Configuration.getProperties().getProperty("browser")));
         driver.manage().timeouts().implicitlyWait(DEFAULT_WAIT_IN_SECONDS, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
@@ -32,7 +32,7 @@ public class Browser {
     }
 
     public static void close() {
-        if (driver == null) {
+        if (driver != null) {
             driver.quit();
             driver = null;
         }

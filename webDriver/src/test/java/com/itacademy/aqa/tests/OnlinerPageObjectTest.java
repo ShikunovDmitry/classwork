@@ -1,4 +1,4 @@
-package com.itacademy.aqa.webdriver;
+package com.itacademy.aqa.tests;
 
 import com.itacademy.aqa.onliner.pageFactory.NewsPageFactory;
 import com.itacademy.aqa.onliner.pages.CatalogPage;

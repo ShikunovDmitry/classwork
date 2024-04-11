@@ -1,6 +1,6 @@
 package com.itacademy.aqa.steam.pages;
 
-import com.itacademy.aqa.onliner.utils.Browser;
+import com.itacademy.aqa.webdriver.Browser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +11,7 @@ public class SteamMainPage {
     private WebElement installButton;
     private WebDriver webDriver;
 
-    public SteamMainPage() {
+    public SteamMainPage(WebDriver webDriver) {
         PageFactory.initElements(Browser.getDriver(), this);
         this.webDriver = webDriver;
     }

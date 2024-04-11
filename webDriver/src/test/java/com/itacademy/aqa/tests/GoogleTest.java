@@ -1,4 +1,4 @@
-package com.itacademy.aqa.webdriver;
+package com.itacademy.aqa.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GoogleTest {
 
-    public static final By SEARCH_FIELD_LOCATOR = By.name("qa");
+    public static final By SEARCH_FIELD_LOCATOR = By.name("q");
     WebDriver webDriver;
 
     @BeforeMethod
