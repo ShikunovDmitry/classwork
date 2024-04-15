@@ -1,0 +1,1 @@
+java -jar c:/selenium-server-4.19.1.jar hub --port 4444

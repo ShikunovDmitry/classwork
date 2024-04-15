@@ -1,0 +1,1 @@
+java -Dwebdriver.chrome.driver=c:/chromedriver.exe -jar c:/selenium-server-4.19.1.jar node --hub http://192.168.100.15:4444/grid/register
