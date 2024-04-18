@@ -1,16 +1,20 @@
-package com.itacademy.aqa.framework.ui.onliner.pages;
+package com.itacademy.aqa.framework.ui.onliner.pages.web;
 
 import com.itacademy.aqa.framework.ui.onliner.TopMenuEnum;
+import com.itacademy.aqa.framework.ui.onliner.pages.BasePage;
+import com.itacademy.aqa.framework.ui.onliner.pages.ICatalogPage;
 import com.itacademy.aqa.framework.utils.WaitUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class CatalogPage extends BasePage {
+import java.util.List;
+
+public class WebCatalogPage extends BasePage implements ICatalogPage {
 
     private static final By CATALOG_PAGE_LOCATOR = By.xpath("//*[contains(@class,'catalog-navigation__title')][contains(text(),'Каталог')]");
     private static final TopMenuEnum MENU_ELEMENT = TopMenuEnum.CATALOG;
 
-    public CatalogPage(WebDriver webDriver) {
+    public WebCatalogPage(WebDriver webDriver) {
         super(webDriver);
     }
 
@@ -23,5 +27,10 @@ public class CatalogPage extends BasePage {
     public boolean isOpened() {
         WaitUtil.waitUntilElementVisible(webDriver, CATALOG_PAGE_LOCATOR, DEFAULT_PAGE_WAIT_IN_SECOND);
         return webDriver.findElements(CATALOG_PAGE_LOCATOR).size() > 0;
+    }
+
+    @Override
+    public List<String> getMenuList() {
+        return List.of();
     }
 }

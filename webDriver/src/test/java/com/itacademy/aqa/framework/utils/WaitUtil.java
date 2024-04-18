@@ -18,4 +18,8 @@ public class WaitUtil {
         WebDriverWait wait = new WebDriverWait(Browser.getDriver(), timeoutInSeconds);
         wait.until(ExpectedConditions.visibilityOfAllElements(webElement));
     }
+
+    public static void waitForElementsCount(WebDriver webDriver, By menuItemsLocator, int i) {
+        //TODO: create waiter
+    }
 }

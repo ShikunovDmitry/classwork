@@ -74,4 +74,5 @@ public class Browser {
     public static JavascriptExecutor getJsExecutor() {
         return (JavascriptExecutor) getDriver();
     }
+
 }
