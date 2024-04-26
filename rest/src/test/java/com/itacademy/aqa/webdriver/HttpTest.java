@@ -3,6 +3,7 @@ package com.itacademy.aqa.webdriver;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
@@ -21,6 +22,7 @@ public class HttpTest {
         HttpClient httpClient = HttpClients.createDefault();
 
         HttpPost httpPost = new HttpPost(BASE_URL + "/post");
+
         httpPost.setHeader("Content-Type","text/plain");
 
         HttpEntity httpEntity = new StringEntity("{\"Hello\":\"World\"}");

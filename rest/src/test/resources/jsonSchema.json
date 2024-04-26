@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "args": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "Hello": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Hello"
+      ]
+    },
+    "files": {
+      "type": "object"
+    },
+    "form": {
+      "type": "object"
+    },
+    "headers": {
+      "type": "object",
+      "properties": {
+        "x-forwarded-proto": {
+          "type": "string"
+        },
+        "x-forwarded-port": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "x-amzn-trace-id": {
+          "type": "string"
+        },
+        "content-length": {
+          "type": "string"
+        },
+        "content-type": {
+          "type": "string"
+        },
+        "user-agent": {
+          "type": "string"
+        },
+        "accept": {
+          "type": "string"
+        },
+        "cache-control": {
+          "type": "string"
+        },
+        "postman-token": {
+          "type": "string"
+        },
+        "accept-encoding": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "x-forwarded-proto",
+        "x-forwarded-port",
+        "host",
+        "x-amzn-trace-id",
+        "content-length",
+        "content-type",
+        "user-agent",
+        "accept",
+        "accept-encoding"
+      ]
+    },
+    "json": {
+      "type": "object",
+      "properties": {
+        "Hello": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Hello"
+      ]
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "args",
+    "data",
+    "files",
+    "form",
+    "headers",
+    "json",
+    "url"
+  ]
+}
