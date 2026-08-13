@@ -39,6 +39,8 @@ public class StringCollectionOperations {
                 .flatMap(str -> Arrays.stream(str.split("\\s+")))
                 .collect(Collectors.toSet());
         System.out.println("Все слова используемые в строках: " + allWords);
+
+        // comment
     }
 }
 
