@@ -1,4 +1,5 @@
 Test Requirements
+Create junit 5 or testNg tests
 📌 Part 1 — VehicleTest
 1.1 Basic Tests
 Vehicle is created with correct licensePlate (uppercased), type, ownerName
