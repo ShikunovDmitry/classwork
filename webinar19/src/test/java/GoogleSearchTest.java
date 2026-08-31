@@ -28,6 +28,8 @@ public class GoogleSearchTest {
     public void setUp() {
         // Automatically downloads the correct ChromeDriver
         WebDriverManager.chromedriver().setup();
+        //download driver manually for you OS from https://googlechromelabs.github.io/chrome-for-testing/#stable
+ //       System.setProperty("webdriver.chrome.driver", "c:/chromedriver.exe");
 
         ChromeOptions options = new ChromeOptions();
         // options.addArguments("--headless");  // uncomment to run without UI
@@ -36,6 +38,11 @@ public class GoogleSearchTest {
 
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
+
+        //implicit timeouts
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().setScriptTimeout(Duration.ofSeconds(10));
 
         // Explicit wait - up to 10 seconds
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -66,11 +73,18 @@ public class GoogleSearchTest {
         driver.get("https://www.google.com");
 
         // Find the search box and type
-        WebElement searchBox = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.name("q"))
-        );
+     //   WebElement searchBox = wait.until(
+     //       ExpectedConditions.visibilityOfElementLocated(By.name("q"))
+      //  );
+        By searchBoxLocator = By.name("q");
+
+        //WebElement searchBox = driver.findElement(searchBoxLocator);
+        WebDriverWait webDriverWait = new WebDriverWait(driver,Duration.ofSeconds(30));
+        WebElement searchBox = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(searchBoxLocator));
+
         searchBox.sendKeys("Selenium WebDriver");
-        searchBox.sendKeys(Keys.RETURN);
+        //searchBox.submit();
+        searchBox.sendKeys(Keys.ENTER);
 
         // Wait for results to load
         wait.until(
@@ -114,6 +128,7 @@ public class GoogleSearchTest {
     public void tearDown() {
         if (driver != null) {
             driver.quit();
+            driver = null;
             System.out.println("✅ Browser closed");
         }
     }
