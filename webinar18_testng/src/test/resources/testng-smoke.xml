@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<!--
+    SMOKE TESTS ONLY suite.
+    Run with: mvn test -DsuiteXmlFile=src/test/resources/testng-smoke.xml
+
+    This demonstrates how you can have multiple suite files to run
+    different subsets of tests (e.g., smoke vs regression vs full).
+-->
+
+<suite name="Smoke Tests Only" verbose="1">
+
+    <test name="Smoke Tests">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="it.academy.T05_GroupsAndDependenciesTest"/>
+        </classes>
+    </test>
+
+</suite>
+
