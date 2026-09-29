@@ -1,7 +1,7 @@
-package pages.pf;
+package it.academy.pages.pf;
 
 import org.openqa.selenium.support.PageFactory;
-import webdriver.Browser;
+import it.academy.webdriver.Browser;
 
 public class InventoryPage {
 

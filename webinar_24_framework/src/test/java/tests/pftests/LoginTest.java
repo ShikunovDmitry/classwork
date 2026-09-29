@@ -2,8 +2,8 @@ package tests.pftests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.pf.InventoryPage;
-import pages.pf.LoginPage;
+import it.academy.pages.pf.InventoryPage;
+import it.academy.pages.pf.LoginPage;
 import tests.BaseTest;
 
 

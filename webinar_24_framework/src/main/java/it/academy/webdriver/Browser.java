@@ -1,13 +1,18 @@
-package webdriver;
+package it.academy.webdriver;
 
+import io.qameta.allure.Allure;
+import it.academy.pages.po.CartPage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.latest.log.Log;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.ConfigReader;
+import it.academy.utilities.ConfigReader;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +24,7 @@ import java.util.Date;
 
 //singletone
 public class Browser {
+  private static final Logger logger = LogManager.getLogger(Browser.class);
 
   private static final long WAIT_TIMEOUT_IN_SECONDS = Long.parseLong(ConfigReader.getProperty("explicit.wait"));
   private static final long PAGE_LOAD_TIMEOUT_IN_SECONDS = Long.parseLong(ConfigReader.getProperty("implicit.wait"));
@@ -45,15 +51,17 @@ public class Browser {
     driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(PAGE_LOAD_TIMEOUT_IN_SECONDS));
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(PAGE_LOAD_TIMEOUT_IN_SECONDS));
 
-    System.out.println("✅ Browser started");
+    logger.info("✅ Browser started");
   }
 
   public static WebElement findVisibleElement(By locator) {
+    logger.debug("looking for visibility of element by locator {}", locator);
     WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT_IN_SECONDS));
     return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
   }
 
   public static WebElement findExistElement(By locator) {
+    logger.debug("looking for existing element by locator {}", locator);
     WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIMEOUT_IN_SECONDS));
     return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
   }
@@ -62,7 +70,7 @@ public class Browser {
     if (driver != null) {
       driver.quit();
       driver = null;
-      System.out.println("✅ Browser closed");
+      logger.info("✅ Browser closed");
     }
   }
 
@@ -76,6 +84,7 @@ public class Browser {
 
     byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
 
+
     Date date = new Date();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy-h-mm-ss-SS--a");
 
@@ -86,8 +95,10 @@ public class Browser {
     try {
       Files.write(new File(screenShotsFolder.getPath() + "/" + fileName).toPath(),
           screenshot, StandardOpenOption.CREATE);
+      logger.info("Screen shot taken to " + screenShotsFolder.getPath() + "/" +  fileName);
+      Allure.addAttachment(fileName, new ByteArrayInputStream((screenshot)));
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.error(e.getMessage());
     }
   }
 
@@ -106,14 +117,14 @@ public class Browser {
             driver.manage().logs().get(
                 LogType.BROWSER);
 
-        System.out.println("Browser Console Logs:");
+        logger.warn("Browser Console Logs:");
         logs.getAll().forEach(entry ->
             System.out.printf("  [%s] %s: %s%n",
                 entry.getLevel(),
                 Instant.ofEpochMilli(entry.getTimestamp()),
                 entry.getMessage()));
       } catch (Exception e) {
-        System.out.println("Log capture not supported: " + e.getMessage());
+        logger.warn("Log capture not supported: " + e.getMessage());
       }
     }
   }
@@ -137,7 +148,7 @@ public class Browser {
               "console.warn('Test warning');" +
               "console.error('Test error');");
 
-      System.out.println("Console log monitoring demo completed");
+      logger.info("Console log monitoring demo completed");
     }
   }
 

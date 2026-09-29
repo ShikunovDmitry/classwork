@@ -2,9 +2,9 @@ package tests.potests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.po.CartPage;
-import pages.po.CartPageElement;
-import pages.po.InventoryPage;
+import it.academy.pages.po.CartPage;
+import it.academy.pages.po.CartPageElement;
+import it.academy.pages.po.InventoryPage;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;

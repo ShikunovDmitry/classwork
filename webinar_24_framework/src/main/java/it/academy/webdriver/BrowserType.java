@@ -1,4 +1,4 @@
-package webdriver;
+package it.academy.webdriver;
 
 public enum BrowserType {
   CHROME,

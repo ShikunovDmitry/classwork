@@ -1,9 +1,9 @@
-package pages.pf;
+package it.academy.pages.pf;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import webdriver.Browser;
+import it.academy.webdriver.Browser;
 
 public class LoginPage {
   private final String baseUrl = "https://www.saucedemo.com";

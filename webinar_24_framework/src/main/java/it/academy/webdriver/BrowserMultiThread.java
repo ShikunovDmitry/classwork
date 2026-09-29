@@ -1,9 +1,9 @@
-package webdriver;
+package it.academy.webdriver;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utilities.ConfigReader;
+import it.academy.utilities.ConfigReader;
 
 import java.io.File;
 import java.io.IOException;

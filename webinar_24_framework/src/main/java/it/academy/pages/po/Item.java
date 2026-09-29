@@ -1,4 +1,4 @@
-package pages.po;
+package it.academy.pages.po;
 
 public class Item {
   public String getTitle(){

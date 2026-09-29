@@ -1,9 +1,9 @@
 package tests.potests;
 
 import org.testng.annotations.BeforeMethod;
-import pages.po.LoginPage;
+import it.academy.pages.po.LoginPage;
 import tests.BaseTest;
-import utilities.ConfigReader;
+import it.academy.utilities.ConfigReader;
 
 public class BasePOTest extends BaseTest {
   @BeforeMethod

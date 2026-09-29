@@ -2,7 +2,7 @@ package tests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import webdriver.Browser;
+import it.academy.webdriver.Browser;
 
 public class BaseTest {
 

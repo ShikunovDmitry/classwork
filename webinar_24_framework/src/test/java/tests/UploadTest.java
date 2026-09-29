@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import webdriver.Browser;
+import it.academy.webdriver.Browser;
 
 import java.time.Duration;
 
