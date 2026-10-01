@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="60">
+    <Properties>
+        <!-- Common timestamp/thread/logger/message pattern used by both appenders. -->
+        <Property name="logPattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %c{1.} - %msg%n</Property>
+        <!-- Directory where the rolling file appender writes log files. -->
+        <Property name="logDirectory">logs</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Writes log events to the console (STDOUT) for quick feedback during development. -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${logPattern}"/>
+        </Console>
+
+        <!-- Writes log events to a file and rotates them daily. -->
+        <RollingFile name="File" fileName="${logDirectory}/app.log"
+                     filePattern="${logDirectory}/app-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="${logPattern}"/>
+            <!-- Rolls the file based on time; here the active file changes once per day. -->
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- Application package logger: enables TRACE so every demo message is visible. -->
+        <Logger name="it.academy.pages" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <!-- Service package logger: starts at DEBUG to hide TRACE but keep useful details. -->
+        <Logger name="it.academy.utilities" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <Logger name="it.academy.webdriver" level="debug" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
+        <Logger name="tests" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Logger>
+        <!-- Fallback logger for everything outside the demo packages. -->
+        <Root level="warn">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
