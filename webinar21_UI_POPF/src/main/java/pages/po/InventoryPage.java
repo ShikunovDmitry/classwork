@@ -22,4 +22,15 @@ public class InventoryPage extends BasePage {
   public List<Item> getItems() {
     return new ArrayList<>();
   }
+
+  public void addItemToCart(String itemToBuy) {
+    getItems().forEach(item -> {
+      item.getTitle().equals(itemToBuy);
+      item.addToCart();
+    });
+  }
+
+  public void goToCart() {
+
+  }
 }
