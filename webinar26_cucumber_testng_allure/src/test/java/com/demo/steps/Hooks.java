@@ -8,6 +8,7 @@ import io.cucumber.java.Before;
 public class Hooks {
 
   private final TestContext testContext;
+
   public Hooks(TestContext testContext) {
     this.testContext = testContext;
   }

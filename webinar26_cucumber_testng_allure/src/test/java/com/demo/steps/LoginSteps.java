@@ -1,16 +1,24 @@
 package com.demo.steps;
 
 import com.demo.context.TestContext;
+import com.demo.models.User;
 import com.demo.utils.AllureUtils;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.assertj.core.api.Assertions;;
+import org.assertj.core.api.Assertions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
+import java.util.Map;
 
 public class LoginSteps {
 
+  protected final Logger log = LoggerFactory.getLogger(getClass());
   private final TestContext context;
   public LoginSteps(TestContext context) {
     this.context = context;
@@ -85,5 +93,57 @@ public class LoginSteps {
   public void iClickTheLoginButton() {
     context.getLoginPage().clickLogin();
     AllureUtils.step("Clicked login button");
+  }
+
+  @When("I login with the following credentials:")
+  public void iLoginWithTheFollowingCredentials(DataTable dataTable) {
+    Map<String, String> credentials = dataTable.asMap(String.class, String.class);
+    String username = credentials.get("username");
+    String password = credentials.get("password");
+    String email = credentials.get("email");
+    log.info("Logging in with DataTable credentials: {}", username);
+    context.getLoginPage().login(username, password);
+    context.setData("username", username);
+    context.setData("email", email);
+    log.info("Logging in with DataTable credentials: {}", username);
+  }
+
+  /**
+   * CUCUMBER FEATURE: Custom @ParameterType
+   * The "userType" parameter type is defined in UserTypeTransformer
+   * Cucumber automatically converts "standard" -> User object
+   */
+  @Given("I am logged in as a {userType} user")
+  public void iAmLoggedInAsUser(User user) {
+    log.info("Logging in as: {}", user);
+    context.getLoginPage().open();
+    context.getLoginPage().login(user.getUsername(), user.getPassword());
+    context.setData("currentUser", user);
+    AllureUtils.addParameter("User Type", user.getRole());
+  }
+
+  @When("I attempt login with multiple users:")
+  public void iAttemptLoginWithMultipleUsers(DataTable dataTable) {
+    List<Map<String, String>> users = dataTable.asMaps();
+
+    users.forEach(userRow -> {
+      String username = userRow.get("username");
+      String password = userRow.get("password");
+      String expected = userRow.get("expectedResult");
+
+      log.info("Testing login for: {} (expected: {})", username, expected);
+      context.getLoginPage().open();
+      context.getLoginPage().login(username, password);
+
+      // Store results for verification
+      context.setData("lastLoginResult_" + username,
+          context.getLoginPage().isErrorDisplayed() ? "failure" : "success");
+      //for example we can retrieve data in different step as the follows:
+      String actual =  context.getData("lastLoginResult_" + username);
+
+      Assertions.assertThat(actual)
+          .as("Result should match")
+          .isEqualTo(expected);
+    });
   }
 }
