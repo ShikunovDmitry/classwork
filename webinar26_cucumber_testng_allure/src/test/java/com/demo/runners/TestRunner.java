@@ -32,7 +32,7 @@ import org.testng.annotations.DataProvider;
 
     // Tag expression - run all except @wip and @manual
 //    tags = "not @wip and not @manual",
-    tags = "@special",
+    //tags = "@special",
 
     // Plugins/Reporters
     plugin = {

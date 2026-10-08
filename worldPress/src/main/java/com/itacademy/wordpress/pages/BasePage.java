@@ -8,14 +8,14 @@ public class BasePage {
   TopPageMenu topPageMenu;
 
 
-  protected MainMenu getMainMenu(){
+  public MainMenu getMainMenu(){
     if(mainMenu == null){
       mainMenu = new MainMenu();
     }
     return mainMenu;
   }
 
-  protected TopPageMenu getTopPageMenu(){
+  public TopPageMenu getTopPageMenu(){
     if(topPageMenu == null){
       topPageMenu = new TopPageMenu();
     }

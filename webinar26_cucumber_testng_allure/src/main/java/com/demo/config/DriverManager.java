@@ -8,9 +8,12 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 
 /**
@@ -31,19 +34,28 @@ public class DriverManager {
   /**
    * Initialize WebDriver based on configuration
    */
-  public static void initDriver() {
+  public static void initDriver() throws MalformedURLException {
     String browser = ConfigReader.get("browser", "chrome");
     boolean headless = Boolean.parseBoolean(ConfigReader.get("headless", "false"));
     int width = Integer.parseInt(ConfigReader.get("browser.width", "1920"));
     int height = Integer.parseInt(ConfigReader.get("browser.height", "1080"));
 
     log.info("Initializing {} driver (headless: {})", browser, headless);
-
-    WebDriver driver = switch (browser.toLowerCase()) {
-      case "firefox" -> createFirefoxDriver(headless);
-      case "edge" -> createEdgeDriver(headless);
-      default -> createChromeDriver(headless);
-    };
+    boolean isRemote = Boolean.parseBoolean(ConfigReader.get("browser.isRemote", "false"));
+    WebDriver driver;
+    if (isRemote) {
+      URL url = new URL(ConfigReader.get("browser.remoteUrl"));
+      driver = switch (browser.toLowerCase()) {
+        case "firefox" -> createFirefoxDriver(url);
+        default -> createChromeDriver(url);
+      };
+    } else {
+      driver = switch (browser.toLowerCase()) {
+        case "firefox" -> createFirefoxDriver(headless);
+        case "edge" -> createEdgeDriver(headless);
+        default -> createChromeDriver(headless);
+      };
+    }
 
     // Configure timeouts
     driver.manage().timeouts()
@@ -108,5 +120,26 @@ public class DriverManager {
       options.addArguments("--headless=new");
     }
     return new EdgeDriver(options);
+  }
+
+  private static WebDriver createChromeDriver(URL url) {
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--no-sandbox");
+    options.addArguments("--disable-dev-shm-usage");
+    options.addArguments("--disable-gpu");
+    options.addArguments("--remote-allow-origins=*");
+    options.setCapability("se:recordVideo", true);
+    options.setCapability("se:timeZone", "US/Pacific");
+
+    return new RemoteWebDriver(url, options);
+  }
+
+  private static WebDriver createFirefoxDriver(URL url) {
+    WebDriverManager.firefoxdriver().setup();
+    FirefoxOptions options = new FirefoxOptions();
+    options.addArguments("--width=1920");
+    options.addArguments("--height=1080");
+
+    return new RemoteWebDriver(url, options);
   }
 }

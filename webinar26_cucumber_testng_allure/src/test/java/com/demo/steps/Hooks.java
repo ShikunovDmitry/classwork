@@ -5,6 +5,8 @@ import com.demo.context.TestContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
+import java.net.MalformedURLException;
+
 public class Hooks {
 
   private final TestContext testContext;
@@ -13,7 +15,7 @@ public class Hooks {
     this.testContext = testContext;
   }
   @Before
-  public void initializeDriver() {
+  public void initializeDriver() throws MalformedURLException {
     DriverManager.initDriver();
   }
 
