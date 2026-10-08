@@ -1,0 +1,37 @@
+status = warn
+name = PropertiesExample
+
+property.logPattern = %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %c{1.} - %msg%n
+property.logDirectory = logs
+
+appender.console.type = Console
+appender.console.name = Console
+appender.console.target = SYSTEM_OUT
+appender.console.layout.type = PatternLayout
+appender.console.layout.pattern = ${logPattern}
+
+appender.file.type = RollingFile
+appender.file.name = File
+appender.file.fileName = ${logDirectory}/app.log
+appender.file.filePattern = ${logDirectory}/app-%d{yyyy-MM-dd}.log.gz
+appender.file.layout.type = PatternLayout
+appender.file.layout.pattern = ${logPattern}
+appender.file.policies.type = Policies
+appender.file.policies.time.type = TimeBasedTriggeringPolicy
+
+logger.app.name = it.academy.
+logger.app.level = trace
+logger.app.additivity = false
+logger.app.appenderRef.console.ref = Console
+logger.app.appenderRef.file.ref = File
+
+logger.service.name = it.academy.
+logger.service.level = debug
+logger.service.additivity = false
+logger.service.appenderRef.console.ref = Console
+logger.service.appenderRef.file.ref = File
+
+rootLogger.level = warn
+rootLogger.appenderRef.console.ref = Console
+rootLogger.appenderRef.file.ref = File
+
