@@ -29,6 +29,9 @@ public class ConfigReader {
         throw new RuntimeException("Config file not found: " + CONFIG_FILE);
       }
       properties.load(input);
+      //Добавим добавления сестемных переменных окружения
+      // чтобы убедиться что переменные окружения используются в тестах и имеют наивысший приоритет
+      properties.putAll(System.getProperties());
       log.info("Configuration loaded from: {}", CONFIG_FILE);
     } catch (IOException e) {
       throw new RuntimeException("Failed to load configuration", e);

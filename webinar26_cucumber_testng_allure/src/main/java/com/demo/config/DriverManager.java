@@ -36,6 +36,12 @@ public class DriverManager {
    */
   public static void initDriver() throws MalformedURLException {
     String browser = ConfigReader.get("browser", "chrome");
+
+   // if(System.getProperties().contains(browser)){
+     // browser = ConfigReader.get("browser");
+    //}
+
+    log.info("Running in browser: {}", browser);
     boolean headless = Boolean.parseBoolean(ConfigReader.get("headless", "false"));
     int width = Integer.parseInt(ConfigReader.get("browser.width", "1920"));
     int height = Integer.parseInt(ConfigReader.get("browser.height", "1080"));
