@@ -40,6 +40,8 @@ public class DriverManager {
    // if(System.getProperties().contains(browser)){
      // browser = ConfigReader.get("browser");
     //}
+    log.info("browser run parameter: {}", System.getProperty("browser"));
+    log.info("environment: {}", ConfigReader.get("environment"));
 
     log.info("Running in browser: {}", browser);
     boolean headless = Boolean.parseBoolean(ConfigReader.get("headless", "false"));
