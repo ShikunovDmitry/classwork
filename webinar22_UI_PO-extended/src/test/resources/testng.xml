@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+
+<suite name="Login Demo Suite" verbose="1">
+
+    <!--
+        ═══════════════════════════════════════════════════════════
+        PARAMETER: passed to @Parameters("browser") in test code.
+        ═══════════════════════════════════════════════════════════
+    -->
+    <parameter name="browser" value="chrome"/>
+
+    <!-- LESSON 1: Basics — Annotations & Assertions -->
+    <test name="Login test">
+        <classes>
+            <class name="tests.potests.LoginTest"/>
+        </classes>
+    </test>
+    <test name="Page factory tests">
+        <packages>
+            <package name="tests.pftests"/>
+        </packages>
+    </test>
+
+</suite>
+

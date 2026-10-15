@@ -1,0 +1,1 @@
+java -jar selenium-server-4.50.0.jar standalone --port 3333

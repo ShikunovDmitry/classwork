@@ -1,0 +1,105 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<!--
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║  TestNG XML Suite Configuration                                               ║
+║                                                                                ║
+║  This file defines HOW tests are organized and run.                            ║
+║  JUnit 4: No equivalent — uses annotations + Maven config only.               ║
+║  JUnit 5: No equivalent — uses junit-platform.properties + @Tag filtering.    ║
+║                                                                                ║
+║  KEY ADVANTAGE: TestNG XML lets you define complex test suites                 ║
+║  declaratively — include/exclude groups, set parallel mode, pass parameters,   ║
+║  and organize tests into logical sections — all without changing Java code.    ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+-->
+
+<suite name="TestNG Demo Suite" verbose="1">
+
+    <!--
+        ═══════════════════════════════════════════════════════════
+        PARAMETER: passed to @Parameters("browser") in test code.
+        ═══════════════════════════════════════════════════════════
+    -->
+    <parameter name="browser" value="chrome"/>
+
+    <!-- LESSON 1: Basics — Annotations & Assertions -->
+    <test name="Lesson 01 - Basics">
+        <classes>
+            <class name="it.academy.T01_BasicAnnotationsTest"/>
+            <class name="it.academy.T02_AssertionsTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 2: Lifecycle — Setup & Teardown -->
+    <test name="Lesson 02 - Lifecycle">
+        <classes>
+            <class name="it.academy.T03_LifecycleTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 3: DataProvider & Parameters -->
+    <test name="Lesson 03 - DataProvider">
+        <classes>
+            <class name="it.academy.T04_DataProviderTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 4: Groups & Dependencies -->
+    <test name="Lesson 04 - Groups and Dependencies">
+        <classes>
+            <class name="it.academy.T05_GroupsAndDependenciesTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 5: Exceptions & Timeouts -->
+    <test name="Lesson 05 - Exceptions and Timeouts">
+        <classes>
+            <class name="it.academy.T06_ExceptionsAndTimeoutsTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 6: Test Attributes (enabled, priority, description) -->
+    <test name="Lesson 06 - Test Attributes">
+        <classes>
+            <class name="it.academy.T07_TestAttributesTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 7: Dependency Injection & ITestContext -->
+    <test name="Lesson 07 - Dependency Injection">
+        <classes>
+            <class name="it.academy.T08_DependencyInjectionTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 8: Factory -->
+    <test name="Lesson 08 - Factory">
+        <classes>
+            <class name="it.academy.T09_FactoryTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 9: Listeners & Retry -->
+    <test name="Lesson 09 - Listeners">
+        <classes>
+            <class name="it.academy.T10_ListenerTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 10: Parallel Execution -->
+    <test name="Lesson 10 - Parallel" parallel="methods" thread-count="4">
+        <classes>
+            <class name="it.academy.T11_ParallelTest"/>
+        </classes>
+    </test>
+
+    <!-- LESSON 11: Test Inheritance -->
+    <test name="Lesson 11 - Inheritance">
+        <classes>
+            <class name="it.academy.T12_ChildTest"/>
+        </classes>
+    </test>
+
+</suite>
+

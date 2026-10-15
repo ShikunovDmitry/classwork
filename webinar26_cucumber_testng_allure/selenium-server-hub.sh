@@ -1,0 +1,1 @@
+java -jar -Djava.net.preferIPv4Stack=true selenium-server-4.50.0.jar hub --port 4444
